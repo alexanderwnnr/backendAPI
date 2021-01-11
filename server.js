@@ -10,13 +10,19 @@ async function start() {
     try {
         await mongoose.connect(mongoURI, {
             useNewUrlParser: true,
-            useUnifiedTopology: true
+            useUnifiedTopology: true,
+            useCreateIndex: true
         })
         console.log('Connected to database...')
     } catch (error) {
         console.error(error.message)
         process.exit(1)
     }
+
+    // Init Middleware
+    app.use(express.json({ extended: false }))
+
+    // Define Routes
     app.use('/api/users', require('./routes/api/users'))
     app.use('/api/profile', require('./routes/api/profile'))
     app.use('/api/posts', require('./routes/api/posts'))
