@@ -11,7 +11,8 @@ async function start() {
         await mongoose.connect(mongoURI, {
             useNewUrlParser: true,
             useUnifiedTopology: true,
-            useCreateIndex: true
+            useCreateIndex: true,
+            useFindAndModify: false
         })
         console.log('Connected to database...')
     } catch (error) {
